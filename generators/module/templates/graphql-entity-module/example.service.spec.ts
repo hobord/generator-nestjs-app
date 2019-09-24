@@ -1,15 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ExampleService } from './example.service';
+import { <%= kebabToPascal(config.name) %>Service } from './<%= config.name %>.service';
 
-describe('ExampleService', () => {
-  let service: ExampleService;
+describe('<%= kebabToPascal(config.name) %>Service', () => {
+  let service: <%= kebabToPascal(config.name) %>Service;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [ExampleService],
+      providers: [<%= kebabToPascal(config.name) %>Service],
     }).compile();
 
-    service = module.get<ExampleService>(ExampleService);
+    service = module.get<<%= kebabToPascal(config.name) %>Service>(<%= kebabToPascal(config.name) %>Service);
   });
 
   it('should be defined', () => {

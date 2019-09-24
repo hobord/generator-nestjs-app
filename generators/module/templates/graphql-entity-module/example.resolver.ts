@@ -1,41 +1,41 @@
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
-import { ExampleService } from './example.service';
-import { Example } from './dto/example.dto';
-import { ExampleInput } from './dto/input-example.input';
+import { <%= kebabToPascal(config.name) %>Service } from './<%= config.name %>.service';
+import { <%= kebabToPascal(config.name) %> } from './dto/<%= config.name %>.dto';
+import { <%= kebabToPascal(config.name) %>Input } from './dto/input-<%= config.name %>.input';
 
 @Resolver()
-export class ExampleResolver {
+export class <%= kebabToPascal(config.name) %>Resolver {
   constructor(
-    private readonly exampleService: ExampleService,
+    private readonly <%= config.name %>Service: <%= kebabToPascal(config.name) %>Service,
   ) {}
 
   @Query(() => String)
-  async exampleHello() {
+  async <%= config.name %>Hello() {
     return 'hello';
   }
 
-  @Query(() => [Example])
-  async examples() {
-    return this.exampleService.findAll();
+  @Query(() => [<%= kebabToPascal(config.name) %>])
+  async <%= config.name %>s() {
+    return this.<%= config.name %>Service.findAll();
   }
 
-  @Query(() => Example)
-  async example(@Args('id') id: string) {
-    return this.exampleService.findOne(id);
+  @Query(() => <%= kebabToPascal(config.name) %>)
+  async <%= config.name %>(@Args('id') id: string) {
+    return this.<%= config.name %>Service.findOne(id);
   }
 
-  @Mutation(() => Example)
-  async createExample(@Args('input') input: ExampleInput) {
-    return this.exampleService.create(input);
+  @Mutation(() => <%= kebabToPascal(config.name) %>)
+  async create<%= kebabToPascal(config.name) %>(@Args('input') input: <%= kebabToPascal(config.name) %>Input) {
+    return this.<%= config.name %>Service.create(input);
   }
 
-  @Mutation(() => Example)
-  async updateExample(@Args('id') id: string, @Args('input') input: ExampleInput) {
-    return this.exampleService.update(id, input);
+  @Mutation(() => <%= kebabToPascal(config.name) %>)
+  async update<%= kebabToPascal(config.name) %>(@Args('id') id: string, @Args('input') input: <%= kebabToPascal(config.name) %>Input) {
+    return this.<%= config.name %>Service.update(id, input);
   }
 
-  @Mutation(() => Example)
-  async deleteExample(@Args('id') id: string) {
-    return this.exampleService.delete(id);
+  @Mutation(() => <%= kebabToPascal(config.name) %>)
+  async delete<%= kebabToPascal(config.name) %>(@Args('id') id: string) {
+    return this.<%= config.name %>Service.delete(id);
   }
 }

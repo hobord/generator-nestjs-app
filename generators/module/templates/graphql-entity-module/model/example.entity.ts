@@ -1,8 +1,8 @@
 import { Column, Entity, ObjectID, ObjectIdColumn } from 'typeorm';
-import { IExample } from '../interfaces/example.interface';
+import { I<%= kebabToPascal(config.name) %> } from '../interfaces/<%= config.name %>.interface';
 
-@Entity({name: 'example'})
-export class ExampleModel implements IExample {
+@Entity({name: '<%= config.name %>'})
+export class <%= kebabToPascal(config.name) %>Model implements I<%= kebabToPascal(config.name) %> {
   @ObjectIdColumn()
   id?: string;
 

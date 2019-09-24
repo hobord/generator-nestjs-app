@@ -1,17 +1,17 @@
 import { Module } from '@nestjs/common';
-import { ExampleResolver } from './example.resolver';
-import { ExampleService } from './example.service';
-import { ExampleRepository } from './model/example.repository';
-import { ExampleModelFactory } from './model/example-model.factory';
+import { <%= kebabToPascal(config.name) %>Resolver } from './<%= config.name %>.resolver';
+import { <%= kebabToPascal(config.name) %>Service } from './<%= config.name %>.service';
+import { <%= kebabToPascal(config.name) %>Repository } from './model/<%= config.name %>.repository';
+import { <%= kebabToPascal(config.name) %>ModelFactory } from './model/<%= config.name %>-model.factory';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ExampleModel } from './model/example.entity';
+import { <%= kebabToPascal(config.name) %>Model } from './model/<%= config.name %>.entity';
 import { ScalarsModule } from '../common/scalars/scalars.module';
 
 @Module({
     imports: [
-        TypeOrmModule.forFeature([ExampleModel]),
+        TypeOrmModule.forFeature([<%= kebabToPascal(config.name) %>Model]),
         ScalarsModule,
     ],
-    providers: [ExampleModelFactory, ExampleRepository, ExampleResolver, ExampleService],
+    providers: [<%= kebabToPascal(config.name) %>ModelFactory, <%= kebabToPascal(config.name) %>Repository, <%= kebabToPascal(config.name) %>Resolver, <%= kebabToPascal(config.name) %>Service],
 })
-export class ExampleModule {}
+export class <%= kebabToPascal(config.name) %>Module {}

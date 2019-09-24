@@ -1,41 +1,41 @@
 import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { IExampleRepository } from '../interfaces/example-repository.interface';
-import { IExample } from '../interfaces/example.interface';
-import { ExampleInput } from '../dto/input-example.input';
-import { ExampleModel } from './example.entity';
-import { ExampleModelFactory } from './example-model.factory';
+import { I<%= kebabToPascal(config.name) %>Repository } from '../interfaces/<%= config.name %>-repository.interface';
+import { I<%= kebabToPascal(config.name) %> } from '../interfaces/<%= config.name %>.interface';
+import { <%= kebabToPascal(config.name) %>Input } from '../dto/input-<%= config.name %>.input';
+import { <%= kebabToPascal(config.name) %>Model } from './<%= config.name %>.entity';
+import { <%= kebabToPascal(config.name) %>ModelFactory } from './<%= config.name %>-model.factory';
 
 @Injectable()
-export class ExampleRepository implements IExampleRepository {
+export class <%= kebabToPascal(config.name) %>Repository implements I<%= kebabToPascal(config.name) %>Repository {
   constructor(
-      @InjectRepository(ExampleModel)
-      private readonly repository: Repository<ExampleModel>,
-      private readonly modelFactory: ExampleModelFactory,
+      @InjectRepository(<%= kebabToPascal(config.name) %>Model)
+      private readonly repository: Repository<<%= kebabToPascal(config.name) %>Model>,
+      private readonly modelFactory: <%= kebabToPascal(config.name) %>ModelFactory,
       ) {
   }
-  async create(createExampleDto: ExampleInput): Promise<IExample> {
-    const model = this.modelFactory.create(createExampleDto);
+  async create(create<%= kebabToPascal(config.name) %>Dto: <%= kebabToPascal(config.name) %>Input): Promise<I<%= kebabToPascal(config.name) %>> {
+    const model = this.modelFactory.create(create<%= kebabToPascal(config.name) %>Dto);
     return this.repository.save(model);
   }
 
-  async findOne(id: string): Promise<IExample> {
+  async findOne(id: string): Promise<I<%= kebabToPascal(config.name) %>> {
     const model = await this.repository.findOne(id);
     return model;
   }
-  async findAll(): Promise<IExample[]> {
+  async findAll(): Promise<I<%= kebabToPascal(config.name) %>[]> {
     const models = await this.repository.find();
     return models;
   }
-  async delete(id: string): Promise<IExample> {
+  async delete(id: string): Promise<I<%= kebabToPascal(config.name) %>> {
     const model =  await this.repository.findOne(id);
     this.repository.delete(model);
     return model;
   }
-  async update(id: string, example: IExample): Promise<IExample> {
+  async update(id: string, data: I<%= kebabToPascal(config.name) %>): Promise<I<%= kebabToPascal(config.name) %>> {
     const updateData = {
-      ...example,
+      ...data,
       updateDate: new Date(),
     };
     let model =  await this.repository.findOne(id);

@@ -5,8 +5,8 @@ The motivation for its use is that communication between processes is usually do
 where each call is an expensive operation.
 
 
-## Example
+## <%= kebabToPascal(config.name) %>
 It is represent the Example object...
 
-## ExampleInput
-Using for Example creation.
+## <%= kebabToPascal(config.name) %>Input
+Using for <%= kebabToPascal(config.name) %> creation.
