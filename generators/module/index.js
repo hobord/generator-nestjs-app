@@ -1,3 +1,4 @@
+'use strict';
 const path = require('path')
 const os = require('os')
 const chalk = require('chalk')
@@ -30,21 +31,26 @@ module.exports = class extends Generator {
       this.myConfig.moduleType = "graphql-entity-module"
       return Promise.resolve()
     }
-    return this.prompt([
-      {
-        type: 'list',
-        name: 'type',
-        message: 'What type of NESTJS module do you want to create?',
-        choices: moduleTypes
-      }
-    ]).then(res => {
+    return this.prompt([{
+      type: 'list',
+      name: 'type',
+      message: 'What type of NESTJS module do you want to create?',
+      choices: moduleTypes
+    }]).then(res => {
       this.myConfig.moduleType = res.type
     })
   }
 
   writing() {
-    let { moduleType, name } = this.myConfig
-    let templateOptions = { kebabToCamel, kebabToPascal, config: this.myConfig }
+    let {
+      moduleType,
+      name
+    } = this.myConfig
+    let templateOptions = {
+      kebabToCamel,
+      kebabToPascal,
+      config: this.myConfig
+    }
     switch (moduleType) {
       case "graphql-entity-module": {
         this.fs.copyTpl(this.templatePath(moduleType + '/dto/example.dto.ts'),
@@ -86,5 +92,9 @@ module.exports = class extends Generator {
         return
       }
     }
+  }
+
+  start() {
+    this.log('Do something...');
   }
 };

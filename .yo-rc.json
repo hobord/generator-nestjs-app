@@ -1,0 +1,9 @@
+{
+  "generator-node": {
+    "promptValues": {
+      "authorName": "Balazs Szabo",
+      "authorEmail": "balazs.szabo@gmail.com",
+      "authorUrl": ""
+    }
+  }
+}
