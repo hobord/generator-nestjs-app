@@ -1,5 +1,5 @@
 {
-  "name": "generator-nestjs-app",
+  "name": "generator-nestjs-app-hobord",
   "version": "1.0.0",
   "description": "A yeoman generator for generators for nestjs app",
   "author": "Balazs Szabo<balazs.szabo@gmail.com>",
