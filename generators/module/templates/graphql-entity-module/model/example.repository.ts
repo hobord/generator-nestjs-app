@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { IExampleRepository } from '../interfaces/exaqmple-repository.interface';
+import { IExampleRepository } from '../interfaces/example-repository.interface';
 import { IExample } from '../interfaces/example.interface';
 import { ExampleInput } from '../dto/input-example.input';
 import { ExampleModel } from './example.entity';

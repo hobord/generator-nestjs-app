@@ -55,8 +55,8 @@ module.exports = class extends Generator {
         this.fs.copyTpl(this.templatePath(moduleType + '/dto/example.dto.ts'),
           this.destinationPath(`src/modules/${name}/dto/${name}.dto.ts`), templateOptions)
 
-        this.fs.copyTpl(this.templatePath(moduleType + '/dto/input-example.dto.ts'),
-          this.destinationPath(`src/modules/${name}/dto/input-${name}.dto.ts`), templateOptions)
+        this.fs.copyTpl(this.templatePath(moduleType + '/dto/input-example.input.ts'),
+          this.destinationPath(`src/modules/${name}/dto/input-${name}.input.ts`), templateOptions)
 
         this.fs.copyTpl(this.templatePath(moduleType + '/interfaces/example.interface.ts'),
           this.destinationPath(`src/modules/${name}/interfaces/${name}.interface.ts`), templateOptions)
@@ -70,8 +70,8 @@ module.exports = class extends Generator {
         this.fs.copyTpl(this.templatePath(moduleType + '/model/example.entity.ts'),
           this.destinationPath(`src/modules/${name}/model/${name}.entity.ts`), templateOptions)
 
-        this.fs.copyTpl(this.templatePath(moduleType + '/model/example.repostory.ts'),
-          this.destinationPath(`src/modules/${name}/model/${name}.repostory.ts`), templateOptions)
+        this.fs.copyTpl(this.templatePath(moduleType + '/model/example.repository.ts'),
+          this.destinationPath(`src/modules/${name}/model/${name}.repository.ts`), templateOptions)
 
         this.fs.copyTpl(this.templatePath(moduleType + '/example.module.ts'),
           this.destinationPath(`src/modules/${name}/${name}.module.ts`), templateOptions)
