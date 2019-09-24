@@ -1,10 +1,10 @@
 'use strict';
-const path = require('path')
-const os = require('os')
-const chalk = require('chalk')
+// const path = require('path')
+// const os = require('os')
+// const chalk = require('chalk')
 const Generator = require('yeoman-generator');
 const yosay = require('yosay')
-const walkDir = require('../../utils/walk-dir')
+// const walkDir = require('../../utils/walk-dir')
 const moduleTypes = require('./module-types')
 const kebabToPascal = require('../../utils/case-change').kebabToPascal
 const kebabToCamel = require('../../utils/case-change').kebabToCamel
