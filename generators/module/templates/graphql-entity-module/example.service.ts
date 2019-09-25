@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@nestjs/common';
 import { I<%= kebabToPascal(config.name) %> } from './interfaces/<%= config.name %>.interface';
 import { <%= kebabToPascal(config.name) %>Input } from './dto/input-<%= config.name %>.input';
 import { <%= kebabToPascal(config.name) %>Repository } from './model/<%= config.name %>.repository';
-import { I<%= kebabToPascal(config.name) %> Repository } from './interfaces/<%= config.name %>-repository.interface';
+import { I<%= kebabToPascal(config.name) %>Repository } from './interfaces/<%= config.name %>-repository.interface';
 
 @Injectable()
 export class <%= kebabToPascal(config.name) %>Service {
