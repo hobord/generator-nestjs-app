@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import { IPaginate } from '../../../common/pagination/paginate.interface';
 import { I<%= kebabToPascal(config.name) %>Repository } from '../interfaces/<%= config.name %>-repository.interface';
 import { I<%= kebabToPascal(config.name) %> } from '../interfaces/<%= config.name %>.interface';
 import { <%= kebabToPascal(config.name) %>Input } from '../dto/input-<%= config.name %>.input';
@@ -24,12 +25,26 @@ export class <%= kebabToPascal(config.name) %>Repository implements I<%= kebabTo
     const model = await this.repository.findOne(id);
     return model;
   }
-  async findAll(): Promise<I<%= kebabToPascal(config.name) %>[]> {
-    const models = await this.repository.find();
+  async findAll(paginate ?: IPaginate): Promise<I<%= kebabToPascal(config.name) %>[]> {
+    const pager = {
+      take: paginate.limit || 30,
+      skip: paginate.offset || 0,
+    };
+
+    const order = {
+      order: { updateDate: 'DESC' },
+    };
+
+    const models = await this.repository.find({
+      where: {
+        ...order,
+      },
+      ...pager,
+    });
     return models;
   }
   async delete(id: string): Promise<I<%= kebabToPascal(config.name) %>> {
-    const model =  await this.repository.findOne(id);
+    const model = await this.repository.findOne(id);
     this.repository.delete(model);
     return model;
   }
@@ -38,7 +53,7 @@ export class <%= kebabToPascal(config.name) %>Repository implements I<%= kebabTo
       ...data,
       updateDate: new Date(),
     };
-    let model =  await this.repository.findOne(id);
+    let model = await this.repository.findOne(id);
     model = Object.assign(model, updateData);
     return this.repository.save(model);
   }
