@@ -1,6 +1,6 @@
 {
   "name": "generator-nestjs-app-hobord",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "A yeoman generator for generators for nestjs app",
   "author": "Balazs Szabo<balazs.szabo@gmail.com>",
   "license": "MIT",

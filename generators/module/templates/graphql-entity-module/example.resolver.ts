@@ -14,28 +14,28 @@ export class <%= kebabToPascal(config.name) %>Resolver {
     return 'hello';
   }
 
-  @Query(() => [<%= kebabToPascal(config.name) %>])
-  async <%= config.name %>s() {
+  @Query(() => [<%= kebabToPascal(config.name) %>], {nullable: true})
+  async <%= config.name %>s(): Promise<<%= kebabToPascal(config.name) %>[]> {
     return this.<%= config.name %>Service.findAll();
   }
 
-  @Query(() => <%= kebabToPascal(config.name) %>)
-  async <%= config.name %>(@Args('id') id: string) {
+  @Query(() => <%= kebabToPascal(config.name) %>, {nullable: true})
+  async <%= config.name %>(@Args('id') id: string): Promise<<%= kebabToPascal(config.name) %>> {
     return this.<%= config.name %>Service.findOne(id);
   }
 
   @Mutation(() => <%= kebabToPascal(config.name) %>)
-  async create<%= kebabToPascal(config.name) %>(@Args('input') input: <%= kebabToPascal(config.name) %>Input) {
+  async create<%= kebabToPascal(config.name) %>(@Args('input') input: <%= kebabToPascal(config.name) %>Input): Promise<<%= kebabToPascal(config.name) %>> {
     return this.<%= config.name %>Service.create(input);
   }
 
   @Mutation(() => <%= kebabToPascal(config.name) %>)
-  async update<%= kebabToPascal(config.name) %>(@Args('id') id: string, @Args('input') input: <%= kebabToPascal(config.name) %>Input) {
+  async update<%= kebabToPascal(config.name) %>(@Args('id') id: string, @Args('input') input: <%= kebabToPascal(config.name) %>Input): Promise<<%= kebabToPascal(config.name) %>> {
     return this.<%= config.name %>Service.update(id, input);
   }
 
   @Mutation(() => <%= kebabToPascal(config.name) %>)
-  async delete<%= kebabToPascal(config.name) %>(@Args('id') id: string) {
+  async delete<%= kebabToPascal(config.name) %>(@Args('id') id: string): Promise<<%= kebabToPascal(config.name) %>> {
     return this.<%= config.name %>Service.delete(id);
   }
 }
