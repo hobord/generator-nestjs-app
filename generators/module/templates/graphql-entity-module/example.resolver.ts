@@ -9,11 +9,6 @@ export class <%= kebabToPascal(config.name) %>Resolver {
     private readonly <%= config.name %>Service: <%= kebabToPascal(config.name) %>Service,
   ) {}
 
-  @Query(() => String)
-  async <%= config.name %>Hello() {
-    return 'hello';
-  }
-
   @Query(() => [<%= kebabToPascal(config.name) %>], {nullable: true})
   async <%= config.name %>s(): Promise<<%= kebabToPascal(config.name) %>[]> {
     return this.<%= config.name %>Service.findAll();

@@ -51,7 +51,7 @@ export class <%= kebabToPascal(config.name) %>Repository implements I<%= kebabTo
   async update(id: string, data: I<%= kebabToPascal(config.name) %>): Promise<I<%= kebabToPascal(config.name) %>> {
     const updateData = {
       ...data,
-      updateDate: new Date(),
+      updateAt: new Date(),
     };
     let model = await this.repository.findOne(id);
     model = Object.assign(model, updateData);

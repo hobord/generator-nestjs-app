@@ -8,8 +8,8 @@ export class <%= kebabToPascal(config.name) %>ModelFactory {
     const now =  new Date();
     const createData = {
       ...data,
-      creationDate: now,
-      updateDate: now,
+      createAt: now,
+      updateAt: now,
     };
     const model = new <%= kebabToPascal(config.name) %>Model();
     return Object.assign(model, createData);
