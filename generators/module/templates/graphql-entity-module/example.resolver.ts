@@ -3,7 +3,7 @@ import { <%= kebabToPascal(config.name) %>Service } from './<%= config.name %>.s
 import { <%= kebabToPascal(config.name) %> } from './dto/<%= config.name %>.dto';
 import { <%= kebabToPascal(config.name) %>Input } from './dto/input-<%= config.name %>.input';
 
-@Resolver()
+@Resolver(of => <%= kebabToPascal(config.name) %>)
 export class <%= kebabToPascal(config.name) %>Resolver {
   constructor(
     private readonly <%= config.name %>Service: <%= kebabToPascal(config.name) %>Service,
