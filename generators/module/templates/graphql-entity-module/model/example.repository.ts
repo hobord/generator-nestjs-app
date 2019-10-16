@@ -2,11 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IPaginate } from '../../../common/pagination/paginate.interface';
+import { IOrderByInput } from '../../../common/order/order-by.input.interface';
 import { I<%= kebabToPascal(config.name) %>Repository } from '../interfaces/<%= config.name %>-repository.interface';
 import { I<%= kebabToPascal(config.name) %> } from '../interfaces/<%= config.name %>.interface';
 import { <%= kebabToPascal(config.name) %>Input } from '../dto/input-<%= config.name %>.input';
 import { <%= kebabToPascal(config.name) %>Model } from './<%= config.name %>.entity';
 import { <%= kebabToPascal(config.name) %>ModelFactory } from './<%= config.name %>-model.factory';
+
 
 @Injectable()
 export class <%= kebabToPascal(config.name) %>Repository implements I<%= kebabToPascal(config.name) %>Repository {
@@ -21,19 +23,27 @@ export class <%= kebabToPascal(config.name) %>Repository implements I<%= kebabTo
     return this.repository.save(model);
   }
 
-  async findOne(id: string): Promise<I<%= kebabToPascal(config.name) %>> {
+  async getByID(id: string): Promise<I<%= kebabToPascal(config.name) %>> {
     const model = await this.repository.findOne(id);
     return model;
   }
-  async findAll(paginate ?: IPaginate): Promise<I<%= kebabToPascal(config.name) %>[]> {
+  async getAll(paginate?: IPaginate, orderBy?: IOrderByInput[]): Promise<I<%= kebabToPascal(config.name) %>[]> {
     const pager = {
-      take: paginate.limit || 30,
-      skip: paginate.offset || 0,
+      take: paginate && paginate.limit ? paginate.limit : 30,
+      skip: paginate && paginate.offset ? paginate.offset : 0,
     };
 
-    const order = {
-      order: { updateDate: 'DESC' },
-    };
+    let order = { order: {}};
+    if (orderBy) {
+      order.order = {};
+      for (const orderItem of orderBy) {
+        order.order[orderItem.column] = orderItem.desc ? 'DESC' : 'ASC';
+      }
+    } else {
+      order = {
+        order: { name: 'ASC' },
+      };
+    }
 
     const models = await this.repository.find({
       where: {
@@ -41,6 +51,7 @@ export class <%= kebabToPascal(config.name) %>Repository implements I<%= kebabTo
       },
       ...pager,
     });
+
     return models;
   }
   async delete(id: string): Promise<I<%= kebabToPascal(config.name) %>> {

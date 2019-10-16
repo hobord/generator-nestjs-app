@@ -1,5 +1,6 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { IPaginate } from '../../common/pagination/paginate.interface';
+import { IOrderByInput } from '../../../common/order/order-by.input.interface';
 import { I<%= kebabToPascal(config.name) %> } from './interfaces/<%= config.name %>.interface';
 import { <%= kebabToPascal(config.name) %>Input } from './dto/input-<%= config.name %>.input';
 import { <%= kebabToPascal(config.name) %>Repository } from './model/<%= config.name %>.repository';
@@ -15,12 +16,12 @@ export class <%= kebabToPascal(config.name) %>Service {
     return await this.repository.create(create<%= kebabToPascal(config.name) %>Dto);
   }
 
-  async findAll(paginate ?: IPaginate): Promise<I<%= kebabToPascal(config.name) %>[]> {
-    return await this.repository.findAll();
+  async getAll(paginate?: IPaginate, orderBy?: IOrderByInput[]): Promise<I<%= kebabToPascal(config.name) %>[]> {
+    return await this.repository.getAll(paginate, orderBy);
   }
 
   async findOne(id: string): Promise<I<%= kebabToPascal(config.name) %>> {
-    return await this.repository.findOne(id);
+    return await this.repository.getByID(id);
   }
 
   async delete(id: string) {

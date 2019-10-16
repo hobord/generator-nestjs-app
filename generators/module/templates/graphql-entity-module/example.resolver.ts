@@ -2,6 +2,8 @@ import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { <%= kebabToPascal(config.name) %>Service } from './<%= config.name %>.service';
 import { <%= kebabToPascal(config.name) %> } from './dto/<%= config.name %>.dto';
 import { <%= kebabToPascal(config.name) %>Input } from './dto/input-<%= config.name %>.input';
+import { PaginateInput } from '../../common/pagination/paginate.input';
+import { OrderByInput } from '../../common/order/order-by.input';
 
 @Resolver(of => <%= kebabToPascal(config.name) %>)
 export class <%= kebabToPascal(config.name) %>Resolver {
@@ -10,13 +12,16 @@ export class <%= kebabToPascal(config.name) %>Resolver {
   ) {}
 
   @Query(() => [<%= kebabToPascal(config.name) %>], {nullable: true})
-  async <%= config.name %>s(): Promise<<%= kebabToPascal(config.name) %>[]> {
-    return this.<%= config.name %>Service.findAll();
+  async <%= config.name %>s(
+    @Args({name: 'paginate', type: () => PaginateInput, nullable: true}) paginate?: PaginateInput,
+    @Args({name: 'orderby', type: () => [OrderByInput], nullable: true}) orderBy?: OrderByInput[],
+  ): Promise<<%= kebabToPascal(config.name) %>[]> {
+    return this.<%= config.name %>Service.getAll(paginate, orderBy);
   }
 
   @Query(() => <%= kebabToPascal(config.name) %>, {nullable: true})
   async <%= config.name %>(@Args('id') id: string): Promise<<%= kebabToPascal(config.name) %>> {
-    return this.<%= config.name %>Service.findOne(id);
+    return this.<%= config.name %>Service.getByID(id);
   }
 
   @Mutation(() => <%= kebabToPascal(config.name) %>)
