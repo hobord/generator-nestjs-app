@@ -59,12 +59,13 @@ export class <%= kebabToPascal(config.name) %>Repository implements I<%= kebabTo
     this.repository.delete(model);
     return model;
   }
-  async update(id: string, data: I<%= kebabToPascal(config.name) %>): Promise<I<%= kebabToPascal(config.name) %>> {
+  async update(<%= kebabToPascal(config.name) %>Id: string, exampleData: I<%= kebabToPascal(config.name) %>): Promise<I<%= kebabToPascal(config.name) %>> {
+    const { id, ...data } = <%= kebabToPascal(config.name) %>Data;
     const updateData = {
       ...data,
       updateAt: new Date(),
     };
-    let model = await this.repository.findOne(id);
+    let model = await this.repository.findOne(<%= kebabToPascal(config.name) %>Id);
     model = Object.assign(model, updateData);
     return this.repository.save(model);
   }
